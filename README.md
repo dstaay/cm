@@ -1,6 +1,6 @@
 ### CM Challanage
 
-A simple example of orchestrator algorithm that takes a list of requested jobs, builds a dependency graph, calculates order to preform jobs.  One twist is that the algorithm also determines which jobs need to be re-run on each pass or can be read from cache (no recurring jobs in dependencies)
+A simple example of orchestrator algorithm that takes a list of requested jobs, builds a dependency graph and calculates order to preform jobs.  One twist is that the algorithm also determines which jobs need to be re-run on each pass or can be read from cache (no recurring jobs in dependencies).
 
 example job request and intital graph:
 
