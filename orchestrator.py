@@ -58,7 +58,8 @@ def orchestrator(tasks):
                 cache[job] = True
                 print (job.id, ' was run')
    
-        
+
+#Build Graph
 A = task('A', True)
 B = task('B', False)
 C = task('C', False)
@@ -72,7 +73,6 @@ E.dependencies = [D,C]
 D.dependencies = [A]
 C.dependencies = [G]
 
-# Figure 1
 
 orchestrator([F, E, G])
     
