@@ -20,6 +20,7 @@ def build_job_queue(tasks):
     in_q = deque(tasks)
     out_q = deque()
     
+    #build graph with edge count
     while in_q:
         task = in_q.popleft()
         dependency_graph[task] = len(task.dependencies)
@@ -30,23 +31,31 @@ def build_job_queue(tasks):
                 dependency_graph[dependency] = len(dependency.dependencies)
                 in_q.append(dependency)
     
-    while len(out_q) < len(dependency_graph):
-        for task in dependency_graph:
+    # determine order sequence from graph
+    unassigned_tasks = {x: True for x in dependency_graph.keys()}
+
+    while unassigned_tasks:
+        new_assignments = []
+        for task in unassigned_tasks:
             if dependency_graph[task] == 0:
                 out_q.append(task)
+                new_assignments.append(task)
                 for child_task in task.children:
                     if task.recurring:
                             child_task.recurring = True
                     dependency_graph[child_task] -= 1
                 dependency_graph[task] = -1
+        for task in new_assignments:
+            del unassigned_tasks[task]
+    
     return out_q
 
 def orchestrator(tasks):
     
     cache = {}
     
-    job_q = build_job_queue(tasks)
-
+    job_q = build_job_queue(tasks) # Returns operations based on Figure 2
+    
     print('Simulate work for request', [task.id for task in tasks])
     for i in range(2):
         print('Initial Pass') if i == 0 else print('Nth Pass')
@@ -54,12 +63,12 @@ def orchestrator(tasks):
             if not job.recurring and job in cache:
                 print (job.id, ' was loaded from cache')
             else:
-                # RUN JOB
-                cache[job] = True
+                # RUN JOB HERE
+                cache[job] = i
                 print (job.id, ' was run')
    
 
-#Build Graph
+#Build Graph (Figure 1)
 A = task('A', True)
 B = task('B', False)
 C = task('C', False)
