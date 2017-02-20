@@ -1,6 +1,6 @@
 ### CM Challanage
 
-A simple orchestrator that takes a directed graph of dependencies, a list of reqested jobs, then calculates order to preform jobs and determines which jobs need to be re-run on each pass or can be read from cache.
+A simple orchestrator that takes a directed graph of dependencies, a list of requested jobs, then calculates order to preform jobs and determines which jobs need to be re-run on each pass or can be read from cache.
 
 example graph:
 
@@ -12,7 +12,7 @@ Resulting job queue after processing input:
 
 Simulation output:
 
-'''
+```
 Simulate work for request ['F', 'E', 'G']
 Initial Pass
 A  was run
@@ -29,4 +29,4 @@ C  was loaded from cache
 E  was run
 F  was run
 
-'''
+```
