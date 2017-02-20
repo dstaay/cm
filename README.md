@@ -13,6 +13,7 @@ Resulting job queue after processing input:
 Simulation output:
 
 ```
+
 Simulate work for request ['F', 'E', 'G']
 Initial Pass
 A  was run
